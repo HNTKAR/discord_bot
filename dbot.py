@@ -94,11 +94,14 @@ async def on_message(message):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     elif message.content.startswith('xx部'):
         await asyncio.sleep(1)
         await client.send_message(message.channel,"song")
         
         
+=======
+>>>>>>> parent of bd676f5... delete words
 =======
 >>>>>>> parent of bd676f5... delete words
     elif message.content.startswith('!help'):
