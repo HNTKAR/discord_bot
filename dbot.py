@@ -40,14 +40,16 @@ async def on_message(message):
 
     msgdata=message.content
 
-    if message.content.startswith('!時刻'):
+    if msgdata.find('!時刻')!=-1:
         await asyncio.sleep(1)
         tcode=timecode()
         dtx=tcode[6]
         await client.send_message(message.channel,tcode[0]+"年"+tcode[1]+"月"+tcode[2]+"日"+"("+datec[dtx]+")")
         await client.send_message(message.channel,tcode[3]+"時"+tcode[4]+"分"+tcode[5]+"秒")
-
-    elif message.content.startswith('!時間割'):
+    elif msgdata.find('!授業時間')!=-1:
+        await asyncio.sleep(1)
+        await client.send_message(message.channel,"1・2校時目:\t9:10~10:40\n3・4校時目:\t10:50~12:20\n5・6校時目:\t13:05~14:35\n7・8校時目:\t14:45~16:15")
+    elif msgdata.find('!時間割')!=-1:
         await asyncio.sleep(1)
         sny,snm,snd,snh,snn,sns,dtx=timecode()
         if len(msgdata)>8:
@@ -74,7 +76,7 @@ async def on_message(message):
                 dtx=(dtx+ddtx)%7
             await client.send_message(message.channel,schedulelist[dtx])
 
-    elif message.content.startswith('なんなん'):
+    elif msgdata.find('なんなん')!=-1:
         await asyncio.sleep(1)
         await client.send_message(message.channel,"( `o´ )ぎんなん")
 
@@ -85,22 +87,27 @@ async def on_message(message):
         with open('/home/pi/Desktop/mypython/xxx.jpg', 'rb') as f:
             await client.send_file(message.channel, f)
 
-
-    elif message.content.startswith("ハム太郎"):
+    elif message.content.startswith('!program'):
+        await asyncio.sleep(1)
+        await client.send_message(message.channel,"For you!!")
+        with open('/home/pi/Desktop/mypython/program.py', 'rb') as f:
+            await client.send_file(message.channel, f)
+            
+    elif msgdata.find("ハム太郎")!=-1:
         await asyncio.sleep(1)
         await client.send_message(message.channel,"全くもってその通りなのだ！！！！！！")
             
 
-    elif message.content.startswith('xx部'):
+    elif msgdata.find('xx部')!=-1:
         await asyncio.sleep(1)
         await client.send_message(message.channel,"song")
         
         
-    elif message.content.startswith('!help'):
+    elif msgdata.find('!help')!=-1:
         await asyncio.sleep(1)
-        await client.send_message(message.channel,"コマンドの前には!をつけてください。\n\n\n[help]:ヘルプ(このコマンド)\n\n[時刻]:現在時刻を表示\n\n[時間割 [x]]:x日後 or x曜日の時間割を表示\n\(xに関する詳細は[時間割help]を参照)\n\n[BOTclear [x]]:xコメント前までのBOTのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n[clear [x]]:xコメント前までの全てのコメントを削除\n(デフォルトでは100コメント前まで遡る)")
+        await client.send_message(message.channel,"コマンドの前には!をつけてください。\n\n\n[help]:ヘルプ(このコマンド)\n\n[時刻]:現在時刻を表示\n\n[授業時間]:授業の開始時間と終了時間を表示\n\n[時間割 [x]]:x日後 or x曜日の時間割を表示\n\(xに関する詳細は[時間割help]を参照)\n\n[BOTclear [x]]:xコメント前までのBOTのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n[clear [x]]:xコメント前までの全てのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n\n※[program]:プログラムの表示")
 
-    elif message.content.startswith('!BOTclear'):
+    elif msgdata.find('!BOTclear')!=-1:
         await asyncio.sleep(1)
         try:
             delint=int(msgdata[10:])
@@ -109,7 +116,7 @@ async def on_message(message):
         deleted = await client.purge_from(message.channel, limit=delint, check=is_me)
         await client.send_message(message.channel, ' {}個のBOTのコメントを削除しました。'.format(len(deleted)))
 
-    elif message.content.startswith('!clear'):
+    elif msgdata.find('!clear')!=-1:
         await asyncio.sleep(1)
         try:
             delint=int(msgdata[7:])
