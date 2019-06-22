@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 import discord
 import asyncio
 import datetime
@@ -37,6 +38,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    if message.author.bot:
+        return
 
     msgdata=message.content
 
@@ -81,10 +84,17 @@ async def on_message(message):
         await client.send_message(message.channel,"( `o´ )ぎんなん")
 
 
-    elif message.content.startswith('xxx'):
+    elif msgdata.find('xxx')!=-1:
         await asyncio.sleep(1)
         await client.send_message(message.channel,"xxx!!")
-        with open('/home/pi/Desktop/mypython/xxx.jpg', 'rb') as f:
+        with open('/home/pi/Desktop/mypython/fuck.jpg', 'rb') as f:
+            await client.send_file(message.channel, f)
+            
+    elif msgdata.find('!fileserver')!=-1:
+        urls=msgdata[12:]
+        urls="/home/pi/Desktop/mypython/"+urls
+        await asyncio.sleep(1)
+        with open(urls, "rb") as f:
             await client.send_file(message.channel, f)
 
     elif message.content.startswith('!program'):
@@ -105,7 +115,7 @@ async def on_message(message):
         
     elif msgdata.find('!help')!=-1:
         await asyncio.sleep(1)
-        await client.send_message(message.channel,"コマンドの前には!をつけてください。\n\n\n[help]:ヘルプ(このコマンド)\n\n[時刻]:現在時刻を表示\n\n[授業時間]:授業の開始時間と終了時間を表示\n\n[時間割 [x]]:x日後 or x曜日の時間割を表示\n\(xに関する詳細は[時間割help]を参照)\n\n[BOTclear [x]]:xコメント前までのBOTのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n[clear [x]]:xコメント前までの全てのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n\n※[program]:プログラムの表示")
+        await client.send_message(message.channel,"[!help]:ヘルプ(このコマンド)\n\n[!時刻]:現在時刻を表示\n\n[!授業時間]:授業の開始時間と終了時間を表示\n\n[!時間割 [x]]:x日後 or x曜日の時間割を表示\n\(xに関する詳細は[!時間割help]を参照)\n\n[!BOTclear [x]]:xコメント前までのBOTのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n[!clear [x]]:xコメント前までの全てのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n\n※[!program]:プログラムの表示")
 
     elif msgdata.find('!BOTclear')!=-1:
         await asyncio.sleep(1)
