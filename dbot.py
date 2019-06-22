@@ -85,10 +85,17 @@ async def on_message(message):
         with open('/home/pi/Desktop/mypython/fuck.jpg', 'rb') as f:
             await client.send_file(message.channel, f)
 
+    
+    elif message.content.startswith('!program'):
+        await asyncio.sleep(1)
+        await client.send_message(message.channel,"For you!!")
+        with open('/home/pi/Desktop/mypython/program.py', 'rb') as f:
+            await client.send_file(message.channel, f)
+
 
     elif message.content.startswith('!help'):
         await asyncio.sleep(1)
-        await client.send_message(message.channel,"コマンドの前には!をつけてください。\n\n\n[help]:ヘルプ(このコマンド)\n\n[時刻]:現在時刻を表示\n\n[時間割 [x]]:x日後 or x曜日の時間割を表示\n\(xに関する詳細は[時間割help]を参照)\n\n[BOTclear [x]]:xコメント前までのBOTのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n[clear [x]]:xコメント前までの全てのコメントを削除\n(デフォルトでは100コメント前まで遡る)")
+        await client.send_message(message.channel,"コマンドの前には!をつけてください。\n\n\n[help]:ヘルプ(このコマンド)\n\n[時刻]:現在時刻を表示\n\n[時間割 [x]]:x日後 or x曜日の時間割を表示\n\(xに関する詳細は[時間割help]を参照)\n\n[BOTclear [x]]:xコメント前までのBOTのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n[clear [x]]:xコメント前までの全てのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n\n※[program]:プログラムの表示")
 
     elif message.content.startswith('!BOTclear'):
         await asyncio.sleep(1)
