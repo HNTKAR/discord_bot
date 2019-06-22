@@ -85,17 +85,20 @@ async def on_message(message):
         with open('/home/pi/Desktop/mypython/fuck.jpg', 'rb') as f:
             await client.send_file(message.channel, f)
 
-    
-    elif message.content.startswith('!program'):
+
+    elif message.content.startswith("ハム太郎"):
         await asyncio.sleep(1)
-        await client.send_message(message.channel,"For you!!")
-        with open('/home/pi/Desktop/mypython/program.py', 'rb') as f:
-            await client.send_file(message.channel, f)
+        await client.send_message(message.channel,"全くもってその通りなのだ！！！！！！")
+            
 
-
+    elif message.content.startswith('電通部'):
+        await asyncio.sleep(1)
+        await client.send_message(message.channel,"ELECTRICAL COMMUNICATION\n引き裂かれてる IMAGINATION\n未来 縛る 回路ほどいて\n\n近頃ハヤリのデジタル制御 \nマルチメディアにGood morning YEAH! \nショートしそうな 頭をかかえて \n君の声も消えてしまいそうさ \n\n外はホラ しびれる電波 忘れた夢が さまよう \n知らないうち 時は過ぎてゆく 君の中に 僕はいる？ \n\n帰る場所探してる ピカイヤの遺伝子は \n波に乗れず 埋もれてく \n二人だけの シグナル 盗み出して 飛ばそう \n\nELECTRICAL COMMUNICATION \n引き裂かれてる IMAGINATION \n誰にも 邪魔させない \nSparkしてる ROCK ACTION \n打ち砕け MEDITATION \n狂った現実(いま)を焼き捨てたい \n\n誰もがモラルと 戦っている 気がついている 悩んでる \nもどかしいほど この世に甘えて 君がどこかに 遠ざかる \n\nためらいは飲み込んで 明日のPOWERにする \n星に願い 待つ人に \n二人だけの シグナル 宇宙(そら)ゆるがせ 飛ばそう\n\nELECTRICAL COMMUNICATION \n意識を消して IMAGINATION \n戦場(ここ)から逃げ出せない \nSparkさせて ROCK ACTION \n四次元の REVOLUTION \n未来縛る 回路ほどいて \n\n帰る場所探してる ピカイヤの遺伝子は \n波に乗れず 埋もれてく \n二人だけの シグナル 盗み出して 飛ばそう \n\nELECTRICAL COMMUNICATION \n引き裂かれてる IMAGINATION \n誰にも 邪魔させない \nSparkしてる ROCK ACTION \n打ち砕け MEDITATION \n狂った現実(いま)を焼き捨てたい \n\nELECTRICAL COMMUNICATION\n意識を消して IMAGINATION\n戦場(ここ)から逃げ出せない\nSparkさせて ROCK ACTION\n四次元の REVOLUTION \n未来縛る 回路ほどいて")
+        
+        
     elif message.content.startswith('!help'):
         await asyncio.sleep(1)
-        await client.send_message(message.channel,"コマンドの前には!をつけてください。\n\n\n[help]:ヘルプ(このコマンド)\n\n[時刻]:現在時刻を表示\n\n[時間割 [x]]:x日後 or x曜日の時間割を表示\n\(xに関する詳細は[時間割help]を参照)\n\n[BOTclear [x]]:xコメント前までのBOTのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n[clear [x]]:xコメント前までの全てのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n\n※[program]:プログラムの表示")
+        await client.send_message(message.channel,"コマンドの前には!をつけてください。\n\n\n[help]:ヘルプ(このコマンド)\n\n[時刻]:現在時刻を表示\n\n[時間割 [x]]:x日後 or x曜日の時間割を表示\n\(xに関する詳細は[時間割help]を参照)\n\n[BOTclear [x]]:xコメント前までのBOTのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n[clear [x]]:xコメント前までの全てのコメントを削除\n(デフォルトでは100コメント前まで遡る)")
 
     elif message.content.startswith('!BOTclear'):
         await asyncio.sleep(1)
