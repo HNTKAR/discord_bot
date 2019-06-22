@@ -1,9 +1,19 @@
 import discord
 import asyncio
 import datetime
-import datetime
+
+datec=["月","火","水","木","金","土","日"]
+schedulelist=["月曜時間割"
+,"火曜時間割"
+,"水曜時間割"
+,"木曜時間割"
+,"金曜時間割"
+,"404 Not Found"
+,"404 Not Found"]
+newinfo="コマンドの日本語化\n特定の言葉に反応するように改良"
 
 client = discord.Client()
+
 def timecode():
     now = datetime.datetime.now() # 現在の日時を取得
     dtx=now.weekday()
@@ -13,21 +23,10 @@ def timecode():
     snh=str(now.hour)
     snn=str(now.minute)
     sns=str(now.second)
-    if dtx==0:
-        dtt="月"
-    elif dtx==1:
-        dtt="火"
-    elif dtx==2:
-        dtt="水"
-    elif dtx==3:
-        dtt="木"
-    elif dtx==4:
-        dtt="金"
-    elif dtx==5:
-        dtt="土"
-    elif dtx==6:
-        dtt="日"
-    return sny,snm,snd,snh,snn,sns,dtt,dtx
+    return sny,snm,snd,snh,snn,sns,dtx
+
+def is_me(m):
+    return m.author == client.user
 
 @client.event
 async def on_ready():
@@ -38,56 +37,75 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith('!date'):
+
+    msgdata=message.content
+
+    if message.content.startswith('!時刻'):
         await asyncio.sleep(1)
         tcode=timecode()
-        await client.send_message(message.channel,tcode[0]+"年"+tcode[1]+"月"+tcode[2]+"日"+"("+tcode[6]+")")
+        dtx=tcode[6]
+        await client.send_message(message.channel,tcode[0]+"年"+tcode[1]+"月"+tcode[2]+"日"+"("+datec[dtx]+")")
         await client.send_message(message.channel,tcode[3]+"時"+tcode[4]+"分"+tcode[5]+"秒")
 
-    elif message.content.startswith('!schedule'):
+    elif message.content.startswith('!時間割'):
         await asyncio.sleep(1)
-        sny,snm,snd,snh,snn,sns,dtt,dtx=timecode()
-        tcode=sny,snm,snd,snh,snn,sns,dtt
-        msgdata=message.content
-        if msgdata[10:]=="Mon":
-            dtx=0
-        elif msgdata[10:]=="Tue":
-            dtx=1
-        elif msgdata[10:]=="Wed":
-            dtx=2
-        elif msgdata[10:]=="Thu":
-            dtx=3
-        elif msgdata[10:]=="Fri":
-            dtx=4
-        elif msgdata[10:]=="Sat":
-            dtx=5
-        elif msgdata[10:]=="Sun":
-            dtx=6
-        elif len(msgdata)==9:
-            dtx=dtx
-        elif (len(msgdata)==11)&(int(msgdata[10])<7):
-            ddtx=int(msgdata[10])
-            dtx=(dtx+ddtx)%7
-            
-        if dtx==0:
-            await client.send_message(message.channel,"月曜時間割")
-        elif dtx==1:
-            await client.send_message(message.channel,"火曜時間割")
-        elif dtx==2:
-            await client.send_message(message.channel,"水曜時間割")
-        elif dtx==3:
-            await client.send_message(message.channel,"木曜時間割")
-        elif dtx==4:
-            await client.send_message(message.channel,"金曜時間割")
+        sny,snm,snd,snh,snn,sns,dtx=timecode()
+        if len(msgdata)>8:
+            await client.send_message(message.channel,"int型の場合x日後の時間割を表示\n数値は1桁(指定しないと0)\n\nchar型の場合x曜日の時間割を表示\n文字はSun,Mon,Tue,Wed,Thu,Fri,Satの7パターン")
         else:
-            await client.send_message(message.channel,"404 Not Found")
+            if msgdata[5:]=="Mon":
+                dtx=0
+            elif msgdata[5:]=="Tue":
+                dtx=1
+            elif msgdata[5:]=="Wed":
+                dtx=2
+            elif msgdata[5:]=="Thu":
+                dtx=3
+            elif msgdata[5:]=="Fri":
+                dtx=4
+            elif msgdata[5:]=="Sat":
+                dtx=5
+            elif msgdata[5:]=="Sun":
+                dtx=6
+            elif len(msgdata)==4:
+                dtx=dtx
+            elif len(msgdata)==6:
+                ddtx=int(msgdata[5])
+                dtx=(dtx+ddtx)%7
+            await client.send_message(message.channel,schedulelist[dtx])
+
+    elif message.content.startswith('なんなん'):
+        await asyncio.sleep(1)
+        await client.send_message(message.channel,"( `o´ )ぎんなん")
+
+
+    elif message.content.startswith('nvidia'):
+        await asyncio.sleep(1)
+        await client.send_message(message.channel,"Fuck you!!")
+        with open('/home/pi/Desktop/mypython/fuck.jpg', 'rb') as f:
+            await client.send_file(message.channel, f)
+
 
     elif message.content.startswith('!help'):
         await asyncio.sleep(1)
-        await client.send_message(message.channel,"コマンドの前には!をつけてください。\n\nhelp:ヘルプ(このコマンド)\ndate:現在時刻を表示\nschedule[x]:x日後 or x曜日の時間割を表示\n(xに関する詳細はsparaを参照)")
-    elif message.content.startswith('!spara'):
-        await asyncio.sleep(1)
-        await client.send_message(message.channel,"int型の場合x日後の時間割を表示\n数値は0~6まで(指定しないと0)\n\nchar型の場合x曜日の時間割を表示\n文字はSun,Mon,Tue,Wed,Thu,Fri,Satの7パターン")
+        await client.send_message(message.channel,"コマンドの前には!をつけてください。\n\n\n[help]:ヘルプ(このコマンド)\n\n[時刻]:現在時刻を表示\n\n[時間割 [x]]:x日後 or x曜日の時間割を表示\n\(xに関する詳細は[時間割help]を参照)\n\n[BOTclear [x]]:xコメント前までのBOTのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n[clear [x]]:xコメント前までの全てのコメントを削除\n(デフォルトでは100コメント前まで遡る)")
 
+    elif message.content.startswith('!BOTclear'):
+        await asyncio.sleep(1)
+        try:
+            delint=int(msgdata[10:])
+        except:
+            delint=100
+        deleted = await client.purge_from(message.channel, limit=delint, check=is_me)
+        await client.send_message(message.channel, ' {}個のBOTのコメントを削除しました。'.format(len(deleted)))
+
+    elif message.content.startswith('!clear'):
+        await asyncio.sleep(1)
+        try:
+            delint=int(msgdata[7:])
+        except:
+            delint=100
+        deleted = await client.purge_from(message.channel, limit=delint, check=None)#is_me)
+        await client.send_message(message.channel, ' {}個のコメントを削除しました。'.format(len(deleted)))
 
 client.run('kye')
