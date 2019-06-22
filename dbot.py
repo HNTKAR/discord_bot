@@ -85,17 +85,20 @@ async def on_message(message):
         with open('/home/pi/Desktop/mypython/xxx.jpg', 'rb') as f:
             await client.send_file(message.channel, f)
 
-    
-    elif message.content.startswith('!program'):
+
+    elif message.content.startswith("ハム太郎"):
         await asyncio.sleep(1)
-        await client.send_message(message.channel,"For you!!")
-        with open('/home/pi/Desktop/mypython/program.py', 'rb') as f:
-            await client.send_file(message.channel, f)
+        await client.send_message(message.channel,"全くもってその通りなのだ！！！！！！")
+            
 
-
+    elif message.content.startswith('xx部'):
+        await asyncio.sleep(1)
+        await client.send_message(message.channel,"song")
+        
+        
     elif message.content.startswith('!help'):
         await asyncio.sleep(1)
-        await client.send_message(message.channel,"コマンドの前には!をつけてください。\n\n\n[help]:ヘルプ(このコマンド)\n\n[時刻]:現在時刻を表示\n\n[時間割 [x]]:x日後 or x曜日の時間割を表示\n\(xに関する詳細は[時間割help]を参照)\n\n[BOTclear [x]]:xコメント前までのBOTのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n[clear [x]]:xコメント前までの全てのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n\n※[program]:プログラムの表示")
+        await client.send_message(message.channel,"コマンドの前には!をつけてください。\n\n\n[help]:ヘルプ(このコマンド)\n\n[時刻]:現在時刻を表示\n\n[時間割 [x]]:x日後 or x曜日の時間割を表示\n\(xに関する詳細は[時間割help]を参照)\n\n[BOTclear [x]]:xコメント前までのBOTのコメントを削除\n(デフォルトでは100コメント前まで遡る)\n\n[clear [x]]:xコメント前までの全てのコメントを削除\n(デフォルトでは100コメント前まで遡る)")
 
     elif message.content.startswith('!BOTclear'):
         await asyncio.sleep(1)
@@ -116,4 +119,3 @@ async def on_message(message):
         await client.send_message(message.channel, ' {}個のコメントを削除しました。'.format(len(deleted)))
 
 client.run('kye')
-
